@@ -1,69 +1,199 @@
-import Image from "next/image";
+import { Container } from "@/components/container";
+import { CredentialsSection } from "@/components/credentials-section";
+import { ExperienceSection } from "@/components/experience-section";
+import { Hero } from "@/components/hero";
+import { ProjectShowcase } from "@/components/project-showcase";
+import { Reveal } from "@/components/reveal";
+import { SignalTrace } from "@/components/signal-trace";
+import { ToolkitSection } from "@/components/toolkit-section";
+import { projects } from "@/lib/projects";
+import { site } from "@/lib/site";
+import { buttonPrimary, buttonSecondary } from "@/lib/ui";
+
+const approachNodes = ["Interface", "API", "Data", "Deploy"];
+
+const contactRows = [
+  {
+    label: "Email",
+    value: site.email,
+    href: `mailto:${site.email}`,
+    external: false,
+  },
+  ...site.socials.map((social) => ({
+    label: social.label,
+    value: social.href.replace(/^https?:\/\//, "").replace(/\/$/, ""),
+    href: social.href,
+    external: true,
+  })),
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <Hero />
+
+      <section
+        id="approach"
+        aria-labelledby="approach-title"
+        className="scroll-mt-24 border-b border-line"
+      >
+        <Container className="grid gap-12 py-20 sm:py-28 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-16">
+          <div className="flex flex-col gap-6">
+            <Reveal>
+              <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-sage">
+                Approach
+              </p>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2
+                id="approach-title"
+                className="max-w-[20ch] font-display text-[clamp(1.9rem,4vw,3rem)] leading-[1.08] text-cream"
+              >
+                Interface, data, and infrastructure treated as one system.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="max-w-xl text-base leading-relaxed text-sage">
+                I work across the stack so the pieces fit together — considered
+                interfaces, dependable APIs, and data models that hold up after
+                launch.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <ul className="mt-2 flex flex-wrap gap-x-7 gap-y-3 font-mono text-[11px] uppercase tracking-[0.18em]">
+                {approachNodes.map((node, index) => (
+                  <li key={node} className="flex items-center gap-2">
+                    <span className="text-lime">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-cream">{node}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+
+          <Reveal y={0} amount={0.2}>
+            <SignalTrace mode="scroll" />
+          </Reveal>
+        </Container>
+      </section>
+
+      <section
+        id="work"
+        aria-labelledby="work-title"
+        className="scroll-mt-24 border-b border-line"
+      >
+        <Container className="py-20 sm:py-28">
+          <div className="lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12">
+            <div className="mb-10 lg:mb-0">
+              <div className="lg:sticky lg:top-24">
+                <div className="flex items-baseline justify-between border-b border-line-strong pb-3 lg:block">
+                  <h2
+                    id="work-title"
+                    className="font-mono text-[11px] uppercase tracking-[0.24em] text-sage"
+                  >
+                    Selected work
+                  </h2>
+                  <span className="font-mono text-[11px] text-sage lg:mt-3 lg:block">
+                    {String(projects.length).padStart(2, "0")} projects
+                  </span>
+                </div>
+                <p className="mt-4 hidden max-w-[18ch] text-sm leading-relaxed text-sage lg:block">
+                  Two products, built end to end.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-10">
+              {projects.map((project, index) => (
+                <ProjectShowcase
+                  key={project.slug}
+                  project={project}
+                  index={index}
+                />
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <ExperienceSection />
+
+      <CredentialsSection />
+
+      <ToolkitSection />
+
+      <section
+        id="contact"
+        aria-labelledby="contact-title"
+        className="scroll-mt-24"
+      >
+        <Container className="py-20 sm:py-28">
+          <Reveal>
+            <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-sage">
+              Contact
+            </p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2
+              id="contact-title"
+              className="mt-5 max-w-[22ch] font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.02] text-cream"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+              Let&rsquo;s build something useful.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-sage">
+              For work, collaboration, or a question — email is the fastest way
+              to reach me.
+            </p>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a href={`mailto:${site.email}`} className={buttonPrimary}>
+                Email me
+              </a>
+              {site.socials.map((social) => (
+                <a
+                  key={social.href}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className={buttonSecondary}
+                >
+                  {social.label}
+                  <span aria-hidden="true">↗</span>
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <dl className="mt-14 grid gap-px border border-line bg-line sm:grid-cols-3">
+              {contactRows.map((row) => (
+                <div key={row.label} className="flex flex-col gap-2 bg-ink p-6">
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-sage">
+                    {row.label}
+                  </dt>
+                  <dd className="text-sm text-cream">
+                    <a
+                      href={row.href}
+                      {...(row.external
+                        ? { target: "_blank", rel: "noreferrer noopener" }
+                        : {})}
+                      className="break-words transition-colors hover:text-lime focus-visible:text-lime"
+                    >
+                      {row.value}
+                    </a>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+        </Container>
+      </section>
+    </>
   );
 }
