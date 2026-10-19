@@ -4,6 +4,7 @@ import { ExperienceSection } from "@/components/experience-section";
 import { Hero } from "@/components/hero";
 import { ProjectShowcase } from "@/components/project-showcase";
 import { Reveal } from "@/components/reveal";
+import { SectionLabel } from "@/components/section-label";
 import { SignalTrace } from "@/components/signal-trace";
 import { ToolkitSection } from "@/components/toolkit-section";
 import { projects } from "@/lib/projects";
@@ -40,9 +41,7 @@ export default function Home() {
         <Container className="grid gap-12 py-20 sm:py-28 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-16">
           <div className="flex flex-col gap-6">
             <Reveal>
-              <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-sage">
-                Approach
-              </p>
+              <SectionLabel index="01">Approach</SectionLabel>
             </Reveal>
             <Reveal delay={0.05}>
               <h2
@@ -85,20 +84,23 @@ export default function Home() {
         className="scroll-mt-24 border-b border-line"
       >
         <Container className="py-20 sm:py-28">
-          <div className="lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12">
+          <Reveal>
+            <h2
+              id="work-title"
+              className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.24em] text-sage"
+            >
+              <span className="text-lime">02</span>
+              <span className="whitespace-nowrap">Selected work</span>
+              <span aria-hidden="true" className="h-px flex-1 bg-line" />
+            </h2>
+          </Reveal>
+
+          <div className="mt-12 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12">
             <div className="mb-10 lg:mb-0">
               <div className="lg:sticky lg:top-24">
-                <div className="flex items-baseline justify-between border-b border-line-strong pb-3 lg:block">
-                  <h2
-                    id="work-title"
-                    className="font-mono text-[11px] uppercase tracking-[0.24em] text-sage"
-                  >
-                    Selected work
-                  </h2>
-                  <span className="font-mono text-[11px] text-sage lg:mt-3 lg:block">
-                    {String(projects.length).padStart(2, "0")} projects
-                  </span>
-                </div>
+                <p className="border-b border-line-strong pb-3 font-mono text-[11px] uppercase tracking-[0.18em] text-cream">
+                  {projects.length} projects
+                </p>
                 <p className="mt-4 hidden max-w-[18ch] text-sm leading-relaxed text-sage lg:block">
                   Two products, built end to end.
                 </p>
@@ -131,9 +133,7 @@ export default function Home() {
       >
         <Container className="py-20 sm:py-28">
           <Reveal>
-            <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-sage">
-              Contact
-            </p>
+            <SectionLabel index="06">Contact</SectionLabel>
           </Reveal>
           <Reveal delay={0.05}>
             <h2

@@ -13,6 +13,7 @@ export function ExperienceSection() {
       <Container className="py-20 sm:py-28">
         <SectionHeading
           id="experience-title"
+          index="03"
           eyebrow="Experience"
           title="A decade shipping and supporting software."
           description="Development, developer support, and API work — with the operational side of running a business alongside it."

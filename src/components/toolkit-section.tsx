@@ -13,6 +13,7 @@ export function ToolkitSection() {
       <Container className="py-20 sm:py-28">
         <SectionHeading
           id="toolkit-title"
+          index="05"
           eyebrow="Toolkit"
           title="The tools behind the work."
         />

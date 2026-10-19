@@ -13,6 +13,7 @@ export function CredentialsSection() {
       <Container className="py-20 sm:py-28">
         <SectionHeading
           id="credentials-title"
+          index="04"
           eyebrow="Education & credentials"
           title="Grounding in computer science, cloud, and security."
         />

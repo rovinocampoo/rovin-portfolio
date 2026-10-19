@@ -1,14 +1,17 @@
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/reveal";
+import { SectionLabel } from "@/components/section-label";
 
 export function SectionHeading({
   id,
+  index,
   eyebrow,
   title,
   description,
   className,
 }: {
   id: string;
+  index?: string;
   eyebrow: string;
   title: ReactNode;
   description?: ReactNode;
@@ -17,9 +20,7 @@ export function SectionHeading({
   return (
     <div className={`flex flex-col gap-5 ${className ?? ""}`}>
       <Reveal>
-        <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-sage">
-          {eyebrow}
-        </p>
+        <SectionLabel index={index}>{eyebrow}</SectionLabel>
       </Reveal>
       <Reveal delay={0.05}>
         <h2

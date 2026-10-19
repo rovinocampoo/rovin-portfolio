@@ -102,6 +102,97 @@
   .nav-link:focus-visible::after {
     transform: scaleX(1);
   }
+
+  /*
+    System map flow: each layer is a list item and the connector between them is
+    a purely decorative hairline + arrow glyph drawn in the gap, so it never
+    enters the accessibility tree. Stacks vertically on small screens and runs
+    horizontally from the `lg` breakpoint.
+  */
+  .system-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .system-flow > li {
+    position: relative;
+  }
+
+  .system-flow > li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -1.25rem;
+    width: 1px;
+    height: 1.25rem;
+    transform: translateX(-50%);
+    background-color: var(--color-line-strong);
+  }
+
+  .system-flow > li:not(:last-child)::before {
+    content: "\2193";
+    position: absolute;
+    left: 50%;
+    bottom: -1.5rem;
+    transform: translate(-50%, 50%);
+    color: var(--color-line-strong);
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.625rem;
+    line-height: 1;
+  }
+
+  /*
+    Case-study disclosure: the System map and Decisions are collapsed behind a
+    native <details> summary so each project card stays scannable. The marker
+    rotates to signal state; the global reduced-motion rule disables the
+    transition when motion is not wanted.
+  */
+  .case-toggle > summary {
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .case-toggle > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .case-toggle__marker {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .case-toggle[open] .case-toggle__marker {
+    transform: rotate(45deg);
+  }
+
+  @media (min-width: 1024px) {
+    .system-flow {
+      flex-direction: row;
+    }
+
+    .system-flow > li {
+      flex: 1 1 0%;
+    }
+
+    .system-flow > li:not(:last-child)::after {
+      left: auto;
+      right: -1.25rem;
+      top: 50%;
+      bottom: auto;
+      width: 1.25rem;
+      height: 1px;
+      transform: translateY(-50%);
+    }
+
+    .system-flow > li:not(:last-child)::before {
+      content: "\2192";
+      left: auto;
+      right: -1.5rem;
+      top: 50%;
+      bottom: auto;
+      transform: translate(50%, -50%);
+    }
+  }
 }
 
 @layer utilities {
