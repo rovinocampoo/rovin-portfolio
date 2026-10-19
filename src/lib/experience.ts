@@ -14,6 +14,18 @@ export type Experience = {
 */
 export const experience: Experience[] = [
   {
+    role: "Independent Full-Stack Developer",
+    org: "Project-Based Development",
+    period: "2026 – Present",
+    current: true,
+    summary:
+      "Independent project-based development, building and shipping full-stack web applications end to end.",
+    points: [
+      "Build and maintain deployed web apps with React/Next.js, TypeScript, Go REST APIs, PostgreSQL, and Supabase; own responsive UI, data design, authentication, testing, deployment, and ongoing support",
+      "Use multi-model AI-assisted development workflows with GitHub Copilot, OpenCode, Codex, DeepSeek, and other LLMs for implementation and debugging; review generated code and validate changes through automated tests, lint/build checks, and production smoke tests",
+    ],
+  },
+  {
     role: "Junior Software Developer",
     org: "STH IT Solutions",
     period: "Nov 2017 – Nov 2018",
