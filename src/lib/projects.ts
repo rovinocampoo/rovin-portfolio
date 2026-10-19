@@ -78,14 +78,16 @@ export const projects: Project[] = [
     problem:
       "Tennis clubs often run on spreadsheets, with participants, sessions, charges, and payments tracked in separate places.",
     description:
-      "A tennis club management platform covering participant and session management, product sales, payment allocation, financial reporting, and audited payment corrections.",
+      "A tennis club management platform for club operations and finances, with participant and session management, match records, product sales, payment allocation, financial reporting, and player self-service.",
     highlights: [
-      "Participant management",
-      "Session management",
-      "Product sales",
-      "Payment allocation",
-      "Financial reporting",
-      "Audited payment corrections",
+      "Participants, memberships & group packages",
+      "Courts, sessions, attendance & match records",
+      "Fee rules, charges & product sales",
+      "Payments, balances & financial histories",
+      "Date-filtered reports & ledger exports",
+      "Player portal, invitations & profile photos",
+      "Payment receipts with allocation details",
+      "Organization roles, branding & audit history",
     ],
     system: {
       summary:
@@ -127,6 +129,16 @@ export const projects: Project[] = [
           "Fees are generated and verified before financial records are written, and changing attendance recalculates charges while leaving manually adjusted amounts untouched.",
       },
       {
+        title: "Player access follows an invitation",
+        detail:
+          "Administrators create invitation links for participants. After signing in or creating an account, players can claim an invitation and access their profile, sessions, match records, doubles pairs, and ledger.",
+      },
+      {
+        title: "Receipts preserve payment context",
+        detail:
+          "Administrators can generate shareable or downloadable PNG receipts from a participant ledger, including payment allocations and correction details.",
+      },
+      {
         title: "Schema changes ship as migrations",
         detail:
           "Database changes are applied through ordered migrations rather than ad-hoc edits, keeping the schema history reviewable next to the application code.",
@@ -165,13 +177,16 @@ export const projects: Project[] = [
     problem:
       "The club needed to publish training sessions and collect booking requests online, while keeping coach availability and admin scheduling under control.",
     description:
-      "A public club site with training schedules in calendar and list views, online booking requests that admins review and approve, a coach availability portal, and admin scheduling.",
+      "A public club website and booking system with session discovery, private request tracking, program selection, admin scheduling and review, and a separate coach portal.",
     highlights: [
-      "Club information",
-      "Public training schedule",
-      "Booking requests & approval",
-      "Coach availability",
-      "Admin scheduling",
+      "Public club pages, FAQ & responsive navigation",
+      "Upcoming sessions & active training programs",
+      "Multi-slot booking requests with participant details",
+      "Private status links for pending, approved & rejected requests",
+      "Admin review, player matching & request decisions",
+      "Training program and session management",
+      "Coach directory, availability & assigned schedules",
+      "Feedback review and updates",
     ],
     system: {
       summary:
@@ -180,7 +195,7 @@ export const projects: Project[] = [
         {
           role: "Client",
           title: "Next.js App Router",
-          detail: "React 19 · TypeScript · public schedule, /coach, and /admin",
+          detail: "React 19 · TypeScript · public pages, /coach, and /admin",
         },
         {
           role: "Proxy",
@@ -192,7 +207,7 @@ export const projects: Project[] = [
           role: "API",
           title: "Go API",
           detail:
-            "net/http · pgx · schedules, booking requests, availability, approvals",
+            "net/http · pgx · schedules, booking requests, staff workflows, feedback",
         },
         {
           role: "Data",
@@ -200,7 +215,7 @@ export const projects: Project[] = [
           detail: "Supabase Auth + RLS roles · versioned SQL migrations",
         },
       ],
-      note: "Approved bookings can sync to Google Calendar and trigger a Resend email; both are optional and run after approval commits.",
+      note: "Approval email notifications and Google Calendar sync depend on server-side provider configuration; bookings can still be approved without them.",
     },
     decisions: [
       {
@@ -217,6 +232,11 @@ export const projects: Project[] = [
         title: "The browser never holds database credentials",
         detail:
           "The Next.js server proxies allowed API paths to the Go API with a shared secret and the client IP; the Go API verifies Supabase sessions and matches them against server-side allowlists.",
+      },
+      {
+        title: "Scheduled and selected programs stay distinct",
+        detail:
+          "A session's scheduled program and a participant's optional program choice are stored and presented separately, preserving both the session context and the participant's request.",
       },
       {
         title: "Public endpoints are rate limited",
